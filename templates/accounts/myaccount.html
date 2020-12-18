@@ -1,0 +1,14 @@
+
+{% load static %}
+{% block myaccount %}
+    <ul class=" bg-dark text-light font-weight-bold">
+        <li class=" bg-dark text-light font-weight-bold">
+            <a class=" bg-dark text-light font-weight-bold" href="{% url 'password_change' %}">Change password</a>
+        </li>
+        <li> 
+            <div class="dropdown-divider"></div>
+                <a class=" bg-dark text-light font-weight-bold" class="dropdown-item" href="{% url 'logout' %}">Log out</a>
+            </div>
+        </li>
+    </ul>                 
+{% endblock myaccount %}

@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>
+    {% block title %} 
+    404 Not Found Page
+    {% endblock title %}   
+    </title>
+
+    <meta charset="utf-8" />
+    <meta name="google" content="notranslate" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!--Add bootstrap-->
+    <link
+      rel="stylesheet"
+      href='{% static  "./assets/bootstrap/css/bootstrap.min.css" %}'
+    />
+    <link
+      rel="stylesheet"
+      href='{% static "./assets/bootstrap/css/Bootsrap-css.css" %}'
+    />
+    <!--add font awesome-->
+    <script src="https://use.fontawesome.com/07ba2c9b73.js"></script>
+    <!--Bootstrap Social media icon-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.css"
+    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!--using custom style css>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/responsive.css" /-->
+    <link rel="stylesheet" href="{% static "./css/base.css" %}">
+  </head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="error-template">
+                    <h1>
+                        Oops!</h1>
+                    <h2>
+                        404 Not Found</h2>
+                    <div class="error-details">
+                        Sorry, an error has occured, Requested page not found!
+                    </div>
+                    <br><br>
+                    <div class="error-actions">
+                        <a href="{% url 'home' %}"  class="btn btn-primary btn-lg">
+                            <span class="glyphicon glyphicon-home"></span>
+                            Take Me Home 
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+

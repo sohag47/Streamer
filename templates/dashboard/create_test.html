@@ -1,0 +1,58 @@
+{% extends 'dashboard_base.html' %}
+{% block title %} Add Movie Item page {% endblock title %} 
+{% block content %}
+<style>
+    .container{
+        padding-left: 280px;
+        padding-top: 100px;
+    }
+</style>
+<!--Content Goes here-->
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col col-sm-10 col-md-8 col-xl-12">
+      <div class="card shadow-lg p-3 mb-5 rounded">
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="card-header bg-dark">
+            <div class="card-title text-center">
+              <h1 class="text-light">Add Movie Item</h1>
+            </div>
+          </div>
+          <div class="card-body" style="padding-bottom: 50px">
+            <div style="padding-bottom: 20px">
+                <input type="text" name="title" id="">
+              <input type="file" name="document">
+            </div>
+            <div style="margin-left: 400px">
+              <button
+                id="submit"
+                type="submit"
+                class="btn btn-success"
+                value="Submit"
+              >
+                Submit
+              </button>
+
+              <button
+                id="cancel"
+                type="reset"
+                class="btn btn-danger"
+                value="Cancel"
+              >
+                <a href="{% url 'home' %}"></a>Cancel
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+      {% if url %}
+      <p>Uploaded image: <a href="{{ url }}">{{ url }}</a> </p>
+      {% endif %}
+  </div>
+</div>
+{% endblock content %}
+<!-- class="text-dark text" -->

@@ -1,0 +1,303 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <!--add font awesome-->
+    <script src="https://use.fontawesome.com/07ba2c9b73.js"></script>
+    <!--custom css style>
+    <link rel="stylesheet" href="{% static 'assets/css/base.css' %}"-->
+    <title>
+      {% block title %} {% if user.is_authenticated %} Base Page {% else %}
+      Login Page {% endif %} {% endblock title %}
+    </title>
+  </head>
+  <body>
+    <style>
+      nav.navbar {
+        background-color: #17202a;
+      }
+      a.navbar-brand {
+        color: #eaecee;
+        text-transform: uppercase;
+      }
+      a.navbar-brand:hover {
+        color: #abb2b9;
+        text-transform: uppercase;
+      }
+      a.nav-link {
+        color: #eaecee;
+        text-decoration: none;
+      }
+      a.nav-link:hover {
+        color: #abb2b9;
+        text-decoration: none;
+      }
+      input.signin_up {
+        padding-right: 10px;
+      }
+      footer.footer {
+        background-color: #17202a;
+        color: #abb2b9;
+        text-align: center;
+        margin-top: 20px;
+        padding-top: 5px;
+        padding-bottom: 2px;
+      }
+      .sidenav {
+        height: 100%;
+        width: 202px;
+        position: fixed;
+        z-index: 1;
+        background-color: #17202a;
+        color: #abb2b9;
+        overflow-x: hidden;
+        padding-top: 20px;
+      }
+      .sidenav a {
+        padding: 6px 8px 6px 16px;
+        padding-bottom: 15px;
+        text-decoration: none;
+        font-size: 18px;
+        color: #818181;
+        display: block;
+      }
+      ul.subscriptionsstyle li {
+        text-decoration: none;
+        list-style-type: none;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+      .sidenav a:hover {
+        color: #eaecee;
+      }
+      .dropdown-menu{
+        background-color: #17202a;
+        
+      }
+      a.dropdown-item{
+        color: #abb2b9;
+      }
+    </style>
+    {% if user.is_authenticated %}
+    <nav class="navbar navbar-expand-lg">
+      <a class="navbar-brand" href="{% url 'home' %}">Streamer</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#"
+              >Browse <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Dropdown
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+            Search
+          </button>
+        </form>
+      </div>
+      <div class="navbar-nav ml-auto row">
+        <div class="nav-item col col-md col-xl">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="userMenu"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i class="fa fa-user-circle fa-lg" aria-hidden="true"></i>
+                {{ user.username }}
+              </a>
+              <div
+                class="dropdown-menu dropdown-menu-right"
+                aria-labelledby="userMenu"
+                style="font-size: 16px"
+              >
+                <a class="dropdown-item" href="#">My account</a>
+                {% for data in channel_name %}
+                <a class="dropdown-item" href="{% url 'channel_detail' pk=data.pk %}">MyChannel</a>
+                {% endfor %}
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Log out</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!--Navbar end-->
+    <div class="sidenav">
+      <a href="{% url 'home' %}"><i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;Home </a>
+      <a href="#services"><i class="fa fa-tint fa-lg" aria-hidden="true"></i>&nbsp;Trending</a>
+      <a href="#clients"><i class="fa fa-youtube-play fa-lg" aria-hidden="true"></i>&nbsp;Subscriptions</a>
+      <a href="#contact"><i class="fa fa-history fa-lg" aria-hidden="true"></i>&nbsp;History </a>
+      <h5 style="padding-left: 10px;">SUBSCRIPTIONS</h5>
+      <ul class="subscriptionsstyle">
+        <li>Epic Music World</li>
+        <li>TheBlackRoseClan</li>
+        <li>Samuel Kim Studios</li>
+    </ul>
+    </div>
+    {% block content %} 
+    
+    {% endblock content %}
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Copyright &copy; 2020 Streamer All Right Reserved</p>
+    </footer>
+    {% else %}
+    <nav class="navbar navbar-expand-lg">
+      <a class="navbar-brand" href="{% url 'home' %}">Streamer</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Dropdown
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" style="margin-right: 40px">
+          <input
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+            Search
+          </button>
+        </form>
+        <div class="signin_up">
+          <input type="button" class="btn btn-outline-success" value="Login" />
+          <input
+            type="button"
+            class="btn btn-outline-warning"
+            value="Sign up"
+          />
+        </div>
+      </div>
+    </nav>
+    <!--Navbar end-->
+    <!--Navbar end-->
+    <div class="sidenav">
+      <a href="#about"><i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;Home </a>
+      <a href="#services"><i class="fa fa-tint fa-lg" aria-hidden="true"></i>&nbsp;Trending</a>
+      <a href="#clients"><i class="fa fa-youtube-play fa-lg" aria-hidden="true"></i>&nbsp;Subscriptions</a>
+      <a href="#contact"><i class="fa fa-history fa-lg" aria-hidden="true"></i>&nbsp;History </a>
+      <h5 style="padding-left: 10px;">SUBSCRIPTIONS</h5>
+    </ul>
+    </div>
+    <!-- Footer -->
+    <footer class="py-3 bg-dark" style="margin-top: 60px">
+      <p class="text-light text-center" style="margin-top: 2px">
+        Copyright &copy; 2020 Sohag All Right Reserved
+      </p>
+    </footer>
+    {% endif %}
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

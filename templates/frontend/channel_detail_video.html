@@ -1,0 +1,46 @@
+{% extends 'frontend/channel_detail.html' %} 
+{% load humanize %}
+
+{% block about %}
+
+<style>
+    h1{
+        padding-left: 20px;
+        padding-top: 20px;
+    }
+    .card-body{
+        color: #eaecee;
+        background-color:   #17202A;
+    }
+</style>
+<h1>Videos</h1>
+<div class="row" style="padding-bottom: 50px;"> 
+    {% for data in video_item %}
+    <div class="col-xl-4" style="padding-bottom: 20px;">
+        <a href="{% url 'video_detail' pk=data.pk %}">
+            <video width='350' controls>
+                    <source src="{{ data.video_content.url }}" type='video/mp4'>
+                        Your browser does not support the video tag.
+            </video>
+        </a>
+        <div class="row">
+            <div class="col-xl">
+                <h3><b>{{ data.title }}</b></h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-6">
+                <p><b>&nbsp;{{  data.view|intword }}&nbsp;Views&nbsp;{{ data.total_likes|intword }}&nbsp;Likes.</b></p>
+            </div>
+            <div class="col-xl-6">
+                <p>&nbsp;{{  data.created_on|naturaltime }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+
+{% endblock about %}

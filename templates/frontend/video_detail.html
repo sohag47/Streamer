@@ -1,0 +1,160 @@
+{% extends 'base.html' %} 
+{% load humanize %}
+{% block content %}
+<style>
+    .video-detail{
+        padding-left: 270px;
+        background-color: #D0D3D4;
+        color: #2a3042;
+        padding-right: 20px;
+        padding-top: 70px;
+    }
+    video{
+        width: 100%;
+        border-radius: 20px;
+
+    }
+    img.profile_pic{
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+      }
+      .channel_nameimage{
+        font-size: 24px;
+        background-color:#eaecee;
+        color: #2a3042;
+        border-radius: 20px;
+        padding-left: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+    .card{
+        background-color:#eaecee;
+        color: #2a3042;
+        border-radius: 20px;
+    }
+</style> 
+<div class="video-detail">
+    <div class="row"> 
+        <div class="col-xl">
+            <video poster="{{ video_item_details.video_img.url }}" controls>
+                    <source src="{{ video_item_details.video_content.url }}" type='video/mp4'>
+                        Your browser does not support the video tag.
+            </video>
+
+            <div class="row">
+                <div class="col-xl">
+                    <h3><b>{{ video_item_details.title }}</b></h3>
+                </div>
+            </div>
+                <div class="row" style="padding-bottom: 10px;">
+                    <div class="col-xl-6">
+                        <p><b>&nbsp;{{  video_item_details.view|intword }}Views</b> &nbsp;{{  video_item_details.created_on|naturaltime }}</p>
+                    </div>
+                    <div class="col-xl-3">
+                        <form action="{% url 'like_post' video_item_details.pk %}" method="POST" style="padding-left: 100px;">
+                            {% csrf_token %}
+                            {% if liked %}
+                                <button 
+                                    type="submit" 
+                                    name="post_id"
+                                    class="btn btn-warning text-dark"
+                                ><i class="fa fa-thumbs-o-down fa-lg" aria-hidden="true"></i>&nbsp;<b>Unlike</b> 
+                                </button>
+                            {% else %}
+                                <button 
+                                    type="submit" 
+                                    name="post_id"
+                                    class="btn btn-primary text-light"
+                                ><i class="fa fa-thumbs-o-up fa-lg" aria-hidden="true"></i>&nbsp;<b>Like</b> 
+                                </button>
+                            {% endif %}
+                            <b>&nbsp;{{  total_likes|intword }}Likes</b>
+                        </form>
+                    </div>
+                    <div class="col-xl-3">
+                        <form
+                            method="POST">
+                        
+                            {% csrf_token %} 
+                            {% if subscribed %}
+                                <button type="submit" name="post_id" class="btn btn-success">
+                                    <i class="fa fa-thumbs-o-down fa-lg" aria-hidden="true"></i>
+                                    &nbsp;Unsubscribe
+                                </button>
+                            {% else %}
+                                <button type="submit" name="post_id" class="btn btn-danger">
+                                    <i class="fa fa-thumbs-o-up fa-lg" aria-hidden="true"></i
+                                    >&nbsp;Subscribe
+                                </button>
+                            {% endif %}
+                           
+                        </form>
+                    </div>
+                </div>
+            
+
+            <div class="channel_nameimage">
+                <div>
+                    <img class="img-circle profile_pic" src="{{ video_item_details.channel_info.profile_img.url }}" alt="Card image cap">
+                    {{ video_item_details.channel_info.name }}<br>
+                    <h4>&nbsp;{{ total_subscribe|intword }}Subscribers</h4>
+                </div>
+                <!--like button-->
+                <br>
+                <div>
+                    <p>{{ video_item_details.description }}</p> 
+                </div>
+            </div>
+
+            <div>
+                <div >
+                    <!-- comments -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h2>{{ comments.count|intword }} Comments</h2>
+                            {% for comment in comments %}
+                                 <div class="comments" style="padding: 10px;">
+                                    <p class="font-weight-bold">
+                                        {{ comment.name }}
+                                        <span class=" text-muted font-weight-normal">
+                                            {{ comment.created_on|naturaltime }}
+                                        </span>
+                                    </p>
+                                    {{ comment.body | linebreaks }}
+                                    <a   class="btn btn-secondary"
+                                href="#"
+                            > Update 
+                            </a>
+                            <a    class="btn btn-danger ml-2"
+                                href="#"
+                            > Delete 
+                            </a> 
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+    
+                    <div class=" card mb-4  mt-3 ">
+                        <div class="card-body">
+
+                                <h3>Leave a comment</h3>
+                                <form method="post" style="margin-top: 1.3em;">
+                                    {{ comment_form }}
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-success  btn-lg" style="margin-top: 10px;">Submit</button>
+                                </form>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

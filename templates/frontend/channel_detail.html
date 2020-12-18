@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %} Channel Detail Page 
+{% endblock title %} {% block content %}
+<style>
+  div.main_content {
+    padding-top: 50px;
+    padding-left: 280px;
+    background-color: #d0d3d4;
+    top: 0;
+  }
+  .card {
+    border-radius: 20px;
+  }
+  .card-body {
+    color: #eaecee;
+    background-color: #17202a;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+  img.profile_pic {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+  }
+  img.cover_pic {
+    padding-top: 0px;
+    height: 250px;
+  }
+  .channel_option {
+    margin-left: 0px;
+    padding-left: 100px;
+  }
+  .channel_option li {
+    list-style-type: none;
+    display: inline-block;
+    padding-left: 100px;
+    text-transform: uppercase;
+  }
+  .channel_option li a {
+    width: 280px;
+    text-decoration: none;
+    color: #eaecee;
+  }
+  .channel_option li a:hover {
+    color: #566573;
+  }
+  .shadow {
+    box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.1);
+  }
+  .about_section {
+    background-color: #17202a;
+    color: #eaecee;
+    padding-left: 25px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+  }
+</style>
+<div class="container-fluid main_content">
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card shadow">
+        <img
+          class="card-img-top img-fluid cover_pic"
+          src="{{ channel_detail_item.cover_img.url }}"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <div class="card-title">
+            <img
+              class="img-circle profile_pic"
+              src="{{ channel_detail_item.profile_img.url }}"
+              alt="Card image cap"
+            />
+            <h1><b>{{ channel_detail_item.name }}</b></h1>
+          </div>
+          <div class="channel_option">
+            <ul>
+              <li>
+                <a href="{% url 'channel_detail' pk=channel_detail_item.pk %}">
+                  Videos
+                </a>
+              </li>
+              <li>
+                <a
+                  href="{% url 'channel_detail_about' pk=channel_detail_item.pk %}"
+                >
+                  About
+                </a>
+              </li>
+              <li>
+                <form
+                  action="{% url 'subscribe_view' channel_detail_item.pk %}"
+                  method="POST"
+                >
+                  {% csrf_token %} {% if subscribed %}
+                  <button type="submit" name="post_id" class="btn btn-success">
+                    <i class="fa fa-thumbs-o-down fa-lg" aria-hidden="true"></i
+                    >&nbsp;Unsubscribe
+                  </button>
+                  {% else %}
+                  <button type="submit" name="post_id" class="btn btn-danger">
+                    <i class="fa fa-thumbs-o-up fa-lg" aria-hidden="true"></i
+                    >&nbsp;Subscribe
+                  </button>
+                  {% endif %}
+                </form>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="about_section shadow">
+        <style>
+          h1 {
+            padding-left: 20px;
+            padding-top: 20px;
+          }
+          .card-body {
+            color: #eaecee;
+            background-color: #17202a;
+          }
+        </style>
+        {% block about %}
+        <h1>Videos</h1>
+        <div class="row" style="padding-bottom: 50px">
+          {% for data in video_item %}
+          <div class="col-xl-4" style="padding-bottom: 20px">
+            <a href="{% url 'video_detail' pk=data.pk %}">
+              <video width="350" controls>
+                <source
+                  src="{{ data.video_content.url }}"
+                  type="video/mp4"
+                />
+                Your browser does not support the video tag.
+              </video>
+            </a>
+            <div class="row">
+              <div class="col-xl">
+                <h3><b>{{ data.title }}</b></h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-6">
+                <p>
+                  <b
+                    >&nbsp;{{ data.view|intword }}&nbsp;Views&nbsp;{{ data.total_likes|intword }}&nbsp;Likes.</b
+                  >
+                </p>
+              </div>
+              <div class="col-xl-6">
+                <p>&nbsp;{{ data.created_on|naturaltime }}</p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% endblock about %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

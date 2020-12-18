@@ -1,0 +1,279 @@
+/* extra space remove */
+html,
+nav,
+footer,
+body {
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
+}
+/* font style */
+.font1 {
+  font-family: cursive, sans-serif;
+}
+.font2 {
+  font-family: "Courier New", Courier, monospace;
+}
+.font3 {
+  font-family: cursive, sans-serif;
+}
+
+/* footer style */
+.footer {
+  background-color: #566573;
+  margin: 0px auto;
+  padding: 20px 0px 20px 0px;
+  color: #f2f3f4;
+}
+
+/* navbar style */
+.navbar {
+  background-color: #17202a;
+}
+.home-bg {
+  background: url(../img/backgroundimg.jpg) no-repeat;
+  background-size: cover;
+}
+#home-bg {
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+#home-bg .contents {
+  padding: 175px 0px 120px;
+}
+#home-bg .overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  background: #0c0808;
+  opacity: 0.6;
+}
+#home-bg .contents h5 {
+  font-size: 50px;
+}
+
+.hero-heading {
+  font-size: 48px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: capitalize;
+  line-height: 70px;
+  letter-spacing: 0.1rem;
+}
+
+.hero-sub-heading {
+  font-size: 20px;
+  font-weight: 400;
+  color: #e6e6e6;
+  line-height: 45px;
+  letter-spacing: 0.1rem;
+}
+#contact {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+/* About style */
+.about-profile {
+  margin: 20px 0 30px 0;
+}
+
+.pro-title {
+  font-weight: 700;
+  color: #040404;
+  width: 120px;
+  margin-bottom: 5px;
+}
+.pro-title:after {
+  position: absolute;
+  color: #040404;
+  font-size: 14px;
+  left: 77px;
+}
+
+.about-profile .admin-sign {
+  position: absolute;
+  right: 45px;
+  bottom: 10px;
+}
+.section-padding {
+  margin-top: 30px;
+}
+.img-thumb {
+  margin-bottom: 0px;
+}
+
+/* Resume */
+.timeline {
+  position: relative;
+}
+
+.timeline .timelin-title {
+  font-size: 20px;
+  text-transform: uppercase;
+  margin-left: 30px;
+}
+
+.timeline li {
+  padding: 0 20px 20px 30px;
+  list-style: none;
+  border-left: 2px solid #f1f1f1;
+}
+
+.timeline li .content-text {
+  background: #f2f2f2;
+  padding: 30px;
+}
+
+.timeline li .line-title {
+  font-size: 16px;
+}
+
+.timeline li span {
+  font-size: 12px;
+  padding: 9px 0;
+  display: block;
+}
+
+.timeline li .line-text {
+  color: #2c3e50;
+  line-height: 18px;
+}
+
+.timeline li:first-child:before {
+  border: 0;
+  background: none;
+  position: relative;
+}
+
+.timeline li:last-child {
+  padding: 0 20px 0px 30px;
+}
+
+.timeline li:before {
+  content: "";
+  border: solid 2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  font-size: 8px;
+  margin-left: -35px;
+  font-weight: 400;
+  background: #fff;
+  display: block;
+  position: absolute;
+  margin-top: 18px;
+  border-color: #2c3e50 !important;
+}
+
+.timeline li:first-child i {
+  font-size: 20px;
+  float: left;
+  margin-left: -30px;
+  line-height: 50px;
+  border-radius: 30px;
+  margin: -12px -55px;
+  background: #2c3e50;
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+}
+.mcolor {
+  background-color: #2c3e50;
+  color: #fff;
+}
+.pfbtn {
+  color: #fff;
+  background-color: #2c3e50;
+  text-transform: uppercase;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+.pfbtn:hover {
+  color: #2c3e50;
+  background-color: #fff;
+}
+.controls {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: 500px;
+  margin-right: 500px;
+}
+#portfolios {
+  background: #f2f2f2;
+}
+
+.img2 {
+  width: 100%;
+  height: 400px;
+}
+
+.shot-item {
+  margin-right: 15px;
+  border-radius: 4px;
+  background: #fff;
+  position: relative;
+}
+#portfolio {
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.pbp {
+  margin-top: 70px;
+  margin-bottom: 100px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  background-color: #f2f2f2;
+}
+
+.progress {
+  margin-bottom: 10px;
+}
+.html {
+  width: 80%;
+  background-color: #34495e;
+}
+.css {
+  width: 70%;
+  background-color: #34495e;
+}
+.js {
+  width: 50%;
+  background-color: #34495e;
+}
+.bp {
+  width: 70%;
+  background-color: #34495e;
+}
+.python {
+  width: 80%;
+  background-color: #34495e;
+}
+.django {
+  width: 50%;
+  background-color: #34495e;
+}
+.psql {
+  width: 60%;
+  background-color: #34495e;
+}
+.portfoliosc {
+  padding-top: 100px;
+}
+.porttitle {
+  padding-top: 50px;
+}
+.portbody {
+  padding-bottom: 100px;
+}

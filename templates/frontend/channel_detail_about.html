@@ -1,0 +1,23 @@
+{% extends 'frontend/channel_detail.html' %} 
+{% load humanize %}
+{% block about %}
+<style>
+    .about_style{
+        padding-left: 50px;
+        margin-top: 20px;
+    }
+</style>
+<div class="about_style">
+    <div class="row" style="padding-bottom: 50px;">
+        <div class="col-xl-9">
+            <h3><b>Description</b></h3>
+            <p>{{ channel_detail_item.description }}</p>
+        </div>
+        <div class="col-xl">
+            <h3><b>Status</b></h3>
+            <p>joined  {{ channel_detail_item.created_on }}</p>
+        </div>
+    </div> 
+</div>
+
+{% endblock about %}

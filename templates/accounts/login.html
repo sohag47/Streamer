@@ -1,0 +1,57 @@
+{% extends 'base_accounts.html' %} {% load static %} {% block stylesheet %}
+<link rel="stylesheet" href='{% static 'css/accounts.css' %}'> {% endblock %} 
+{% block body %}
+<style>
+ .card-header{
+  background-color: #2a3042;
+  color:  #f8f8fb;
+  border-radius: 10px;
+ }
+ .card{
+  border-radius: 20px;
+ }
+</style>
+<div class="container-fluid">
+    <h1 class="text-center logo my-4">
+      <a href="{% url 'home' %}">Streamer</a>
+    </h1>
+    <div class="row justify-content-center">
+      <div class="col-lg-4 col-md col-sm">
+        <div class="card shadow-lg p-3 mb-5">
+          <form method="POST" action="" novalidate>
+            {% csrf_token %}
+            <div class="card-header">
+              <div class="card-title text-center">
+                <h1 class="text-light">Log in</h1>
+              </div>
+            </div>
+            <div class="card-body text-center">
+              {% for field in form %}
+              <div class="fieldWrapper">
+                {{ field.errors }}
+                <br />
+                <label>{{ field.label_tag }}</label>
+                {{ field }} {% if field.help_text %}
+                <p class="help">{{ field.help_text|safe }}</p>
+                {% endif %}
+              </div>
+              {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" value="Submit">
+              Log in
+            </button>
+          </form>
+          <div class="card-footer text-muted text-center">
+            New to Streamer? <a href="{% url 'signup'%}">Sign up</a>
+          </div>
+          <div class="text-center py-2">
+            <small>
+              <a href="#" class="text-muted"> Forgot your password? </a>
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% endblock %}
