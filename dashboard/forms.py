@@ -11,7 +11,7 @@ class ChannelInfoForm(forms.ModelForm):
             'name': forms.TextInput(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': "Enter Your Name",
+                    'placeholder': "Enter Channel Name",
                     'required': 'true'
 
                 }
@@ -19,7 +19,7 @@ class ChannelInfoForm(forms.ModelForm):
             'description': forms.Textarea(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': "Enter Your Comment",
+                    'placeholder': "Enter Channel Description",
 
                 }
             ),
@@ -51,7 +51,7 @@ class VideoInfoForm(forms.ModelForm):
             'title': forms.TextInput(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': "Enter Your Name",
+                    'placeholder': "Enter Video Title",
                     'required': 'true'
 
                 }
@@ -59,7 +59,7 @@ class VideoInfoForm(forms.ModelForm):
             'description': forms.Textarea(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': "Enter Your Comment",
+                    'placeholder': "Enter Video Description",
 
                 }
             ),

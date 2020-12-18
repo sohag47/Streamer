@@ -6,6 +6,10 @@
         padding-left: 280px;
         padding-top: 100px;
     }
+    .card-header{
+      background-color: #2a3042;
+        color:  #f8f8fb;
+    }
 </style>
 <!--Content Goes here-->
 <div class="container">
@@ -14,9 +18,9 @@
       <div class="card shadow-lg p-3 mb-5 rounded">
         <form method="POST" enctype="multipart/form-data">
           {% csrf_token %}
-          <div class="card-header bg-dark">
+          <div class="card-header">
             <div class="card-title text-center">
-              <h1 class="text-light">Add Movie Item</h1>
+              <h1>Add Video Item</h1>
             </div>
           </div>
           <div class="card-body" style="padding-bottom: 50px">
@@ -35,9 +39,8 @@
 
               <button
                 id="cancel"
-                type="reset"
+                type="button"
                 class="btn btn-danger"
-                value="Cancel"
               >
                 <a href="{% url 'dashboard' %}"></a>Cancel
               </button>
