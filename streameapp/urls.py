@@ -1,9 +1,10 @@
 from django.urls import path
 from . import views
-from streameapp.views import home, channel_detail, channel_detail_about, video_detail, like_view, subscribe_view
+from streameapp.views import home, channel_detail, channel_detail_about, video_detail, like_view, subscribe_view, search_result_view
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('search/', views.search_result_view, name='search'),
     path('like_post/<int:pk>/', views.like_view, name='like_post'),
     path('subscribe_view/<int:pk>/', views.subscribe_view, name='subscribe_view'),
     path('channel_detail/<pk>/', views.channel_detail, name='channel_detail'),

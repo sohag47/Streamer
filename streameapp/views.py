@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 # Create your views here.
 import time
+from django.db.models import Q
 
 
 def home(request):
@@ -19,6 +20,22 @@ def home(request):
         'video_item': video_item
     }
     return render(request, 'frontend/home.html', context)
+
+
+def search_result_view(request):
+    #channel_name = ChannelInfo.objects.filter(name=query)
+    context = {}
+
+    query = request.GET.get('q')
+    print(query)
+    lookups = Q(keyword__icontains=query)
+    video_item = VideoInfo.objects.filter(lookups).distinct()
+
+    context = {
+        'video_item': video_item,
+        'query': query
+    }
+    return render(request, 'frontend/search_result_view.html', context)
 
 
 def subscribe_view(request, pk):

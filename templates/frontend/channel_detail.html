@@ -4,8 +4,8 @@
 {% endblock title %} {% block content %}
 <style>
   div.main_content {
-    padding-top: 50px;
-    padding-left: 280px;
+    padding-top: 60px;
+    padding-left: 240px;
     background-color: #d0d3d4;
     top: 0;
   }
@@ -127,7 +127,7 @@
           {% for data in video_item %}
           <div class="col-xl-4" style="padding-bottom: 20px">
             <a href="{% url 'video_detail' pk=data.pk %}">
-              <video width="350" controls>
+              <video width="350" poster="{{ data.video_img.url }}" controls>
                 <source
                   src="{{ data.video_content.url }}"
                   type="video/mp4"

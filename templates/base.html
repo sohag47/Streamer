@@ -306,10 +306,16 @@
                 </div>
               </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0 search_style">
+            <form
+                action="{% url 'search' %}" 
+                method="GET"
+                class="form-inline my-2 my-lg-0 search_style"
+                >
+                {% csrf_token %}
               <input
                 class="form-control mr-sm-2"
                 type="search"
+                name="q"
                 placeholder="Search"
                 aria-label="Search"
               />

@@ -1,0 +1,40 @@
+body {
+  background-color: #1a1919;
+}
+/* nav{
+    background-image: linear-gradient(black,#dddee0);
+    color: white;
+} */
+nav {
+  background-color: #bd1425 !important;
+}
+
+.navbar .nav-item:hover .nav-link {
+  color: red;
+}
+.navbar .navbar-brand:hover {
+  color: red;
+}
+.nav-link {
+  color: white !important;
+  font-weight: bold;
+}
+.nav-item {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.dropdown-menu {
+  background-color: #0e0e0e;
+}
+.dropdown-item {
+  color: white !important;
+}
+.dropdown-item:hover {
+  color: #0e0e0e !important;
+}
+.dropdown:hover > .dropdown-menu {
+  display: block;
+}
+.latest {
+  color: white;
+}

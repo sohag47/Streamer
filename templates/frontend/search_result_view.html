@@ -1,0 +1,79 @@
+{% extends 'base.html' %} 
+{% load humanize %}
+{% block title %}Streamer | Home Page {% endblock title %} 
+
+
+{%block content %} 
+<style>
+    .video_style{
+        padding-top: 50px;
+        padding-left: 270px;
+        background-color: #D0D3D4;
+        color:  #2a3042;
+        padding-right: 20px;
+    }
+    a.channel_name{
+        color: #2a3042;
+    }
+    .shadow {
+        box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.1);
+      }
+    .card-body{
+        color: #17202A;
+        background-color:  #eaecee;
+        margin-top: 30px;
+        margin-bottom: 20px;
+        border-radius: 20px;
+    }
+    h3{
+        padding-left: 20px;
+    }
+    .row{
+        padding-left: 20px;
+    }
+    video{
+        border-radius: 20px;
+    }
+</style>
+
+<div class="card video_style ">
+    <div class="card-body shadow">
+      <div class="row">
+        <div class="col">
+          <div>
+            <h3>Results: {{ query }}</h3>
+        </div>
+        </div>
+      </div>
+        <div class="row">
+            <div class="col-12">
+                <h3>Videos</h3>
+            </div>
+        </div>
+        
+        <div class="row">
+            {% for data in video_item %}
+                <div class="col-xl-4">
+                    <a href="{% url 'video_detail' pk=data.pk %}">
+                    <video width='350' poster="{{ data.video_img.url }}" controls>
+                        <source src="{{ data.video_content.url }}" type='video/mp4'>
+                            Your browser does not support the video tag.
+                    </video>
+                    </a>
+                    <div>
+                        <div>
+                            <h4><b>{{ data.title }}</b></h4>
+                            <a class="channel_name" href="{% url 'channel_detail' pk=data.channel_info.pk %}"> 
+                                <p><b>{{ data.channel_info.name }}</b></p>
+                            </a>
+                            <p><b>&nbsp;{{  data.view|intword }}&nbsp;Views&nbsp;{{ data.total_likes|intword }}&nbsp;Likes.</b> &nbsp;{{  data.created_on|naturaltime }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

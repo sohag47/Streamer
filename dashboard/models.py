@@ -29,6 +29,7 @@ class VideoInfo(models.Model):
     user_name = models.ForeignKey(User, on_delete=models.CASCADE)
     like = models.ManyToManyField(User, blank=True, related_name='video_post')
     view = models.IntegerField(default=0, null=0, blank=True)
+    keyword = models.TextField(blank=True)
 
     def __str__(self):
         return self.title

@@ -18,7 +18,7 @@
     {% for data in video_item %}
     <div class="col-xl-4" style="padding-bottom: 20px;">
         <a href="{% url 'video_detail' pk=data.pk %}">
-            <video width='350' controls>
+            <video width='350' poster="{{ data.video_img.url }}" controls>
                     <source src="{{ data.video_content.url }}" type='video/mp4'>
                         Your browser does not support the video tag.
             </video>

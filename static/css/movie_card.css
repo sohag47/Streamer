@@ -1,0 +1,26 @@
+.truncateLongTexts {
+    font-family: 'Roboto', sans-serif;
+    height: 100px;
+    text-align: justify;
+   /* white-space: nowrap;*/
+    overflow: hidden;
+    /*text-overflow: clip;*/
+    }
+.latest{
+    background-color: #0e0e0e;
+    color: white;
+    text-align: center;
+}
+.all{
+    background-color: #0e0e0e;
+    color: white;
+    text-align: center;
+}
+.card:hover{
+    transform: scale(1.2);
+}
+.card-title{
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: bolder;
+    color: rgb(109, 49, 6);
+}
