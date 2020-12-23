@@ -27,7 +27,7 @@ def search_result_view(request):
     context = {}
 
     query = request.GET.get('q')
-    print(query)
+    #print(query)
     lookups = Q(keyword__icontains=query)
     video_item = VideoInfo.objects.filter(lookups).distinct()
 
@@ -160,3 +160,14 @@ def like_view(request, pk):
         post.like.add(request.user)
         liked = True
     return HttpResponseRedirect(reverse('video_detail', args=[str(pk)]))
+
+
+@login_required
+def subscription_view(request):
+    context = {}
+    channel_detail = ChannelInfo.objects.filter(
+        subscribe=request.user)
+    context = {
+        'channel_detail': channel_detail
+    }
+    return render(request, 'frontend/subscription_view.html', context)

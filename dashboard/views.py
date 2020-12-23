@@ -1,3 +1,4 @@
+from streameapp.views import video_detail
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Permission, User
@@ -22,6 +23,7 @@ def dashboard_home(request):
     return render(request, 'dashboard/dashboard_home.html', context)
 
 
+@login_required
 # Create Operation:
 def dashboard_create_channel(request):
     if request.method == "POST":
@@ -37,6 +39,7 @@ def dashboard_create_channel(request):
     return render(request, 'dashboard/create_channel.html', context)
 
 
+@login_required
 # Update Operation:
 def edit_channel(request, pk):
     channel = get_object_or_404(ChannelInfo, pk=pk)
@@ -53,6 +56,7 @@ def edit_channel(request, pk):
     return render(request, 'dashboard/edit_channel.html', context)
 
 
+@login_required
 # Delete Operation:
 def delete_channel(request, pk):
 
@@ -66,7 +70,19 @@ def delete_channel(request, pk):
     return render(request, "dashboard/delete_channel.html", context)
 
 
-# CURD Operation for Channel
+@login_required
+# CURD Operation for Video:
+# Read Operation:
+def allvideos_list(request):
+    context = {}
+    video_detail = VideoInfo.objects.filter(user_name=request.user)
+    context = {
+        'video_detail': video_detail
+    }
+    return render(request, 'dashboard/allvideos_list.html', context)
+
+
+@login_required
 # Create Operation:
 def dashboard_create_video(request):
     if request.method == "POST":
@@ -82,6 +98,7 @@ def dashboard_create_video(request):
     return render(request, 'dashboard/create_video.html', context)
 
 
+@login_required
 # Update Operation:
 def edit_video(request, pk):
     video = get_object_or_404(VideoInfo, pk=pk)
@@ -98,6 +115,7 @@ def edit_video(request, pk):
     return render(request, 'dashboard/edit_video.html', context)
 
 
+@login_required
 # Delete Operation:
 def delete_video(request, pk):
     obj = get_object_or_404(VideoInfo, pk=pk)
@@ -109,9 +127,10 @@ def delete_video(request, pk):
     }
     return render(request, "dashboard/delete_video.html", context)
 
-# CURD Operation for Channel
 
-
+@login_required
+# CURD Operation for extra user info:
+# Create User info operation
 def create_user_extra_info(request):
     if request.method == "POST":
         form = ExtraUserInfoForm(request.POST, request.FILES)
@@ -126,6 +145,7 @@ def create_user_extra_info(request):
     return render(request, 'dashboard/create_user_extra_info.html', context)
 
 
+@login_required
 # Update Operation:
 def edit_user_extra_info(request, pk):
     user_extra_info = get_object_or_404(ExtraUserInfo, pk=pk)
@@ -143,17 +163,15 @@ def edit_user_extra_info(request, pk):
     return render(request, 'dashboard/edit_user_extra_info.html', context)
 
 
-'''
+@login_required
 # Delete Operation:
-def delete_channel(request, pk):
+def delete_user_extra_info(request, pk):
 
-    obj = get_object_or_404(ChannelInfo, pk=pk)
+    obj = get_object_or_404(ExtraUserInfo, pk=pk)
     if request.method == "POST":
         obj.delete()
-        return redirect('/')
+        return redirect('dashboard')
     context = {
         'obj': obj
     }
-    return render(request, "dashboard/delete_channel.html", context)
-
-'''
+    return render(request, "dashboard/delete_user_extra_info.html", context)

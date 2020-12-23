@@ -38,19 +38,20 @@
 
 <div class="card video_style ">
     <div class="card-body shadow">
-      <div class="row">
-        <div class="col">
-          <div>
-            <h3>Results: {{ query }}</h3>
-        </div>
-        </div>
-      </div>
-        <div class="row">
-            <div class="col-12">
-                <h3>Videos</h3>
+        {% if video_item %}
+            <div class="row">
+                <div class="col">
+                    <h3>Results: "{{ query }}"</h3>
+                </div>
             </div>
-        </div>
-        
+            <div class="row">
+                <div class="col-12">
+                    <h3>Videos</h3>
+                </div>
+            </div>
+        {% else %}
+            <h3>"{{ query }}" does not exist!!!</h3>
+        {% endif %}
         <div class="row">
             {% for data in video_item %}
                 <div class="col-xl-4">

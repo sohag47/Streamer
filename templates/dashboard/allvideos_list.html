@@ -1,0 +1,131 @@
+{% extends 'dashboard_base.html' %}
+{% load humanize %} 
+
+{% block title %}
+Subscribed Channel Page
+{% endblock title %} 
+
+{% block content %}
+<style>
+    div.main_content {
+        padding-top: 90px;
+        padding-left: 280px;
+        background-color: #d0d3d4;
+        top: 0;
+      }
+      .shadow {
+        box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.1);
+      }
+    
+      thead {
+        background-color: #17202a;
+        color: #eaecee;
+      }
+      tbody {
+        background-color: #eaecee;
+        color: #17202a;
+      }
+      .table-hover {
+        background-color: #17202a;
+        color: #eaecee;
+      }
+    
+      h1 {
+        text-align: center;
+        color: #17202a;
+      }
+      img.profile_pic {
+        width: 60px;
+        height: 60px;
+      }
+      a.channel_name_style {
+        color: #17202a;
+      }
+      .card {
+        margin-bottom: 20px;
+        border-radius: 10px;
+      }
+      .card-title {
+        border-radius: 10px;
+        background-color: #17202a;
+      }
+      .card-body {
+        padding-left: 30px;
+      }
+      .card-title h1 {
+        color: #eaecee;
+      }
+      .profile_pic_user {
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+      }
+</style>
+<div class="conatiner-fluid main_content">
+    <div class="row">
+        <div class="col-xl">
+            <div class="card">
+                <div class="card-title">
+                    <h1>All Videos</h1>
+                </div>
+                <div class="card-body">
+                    <table class="table shadow table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Video Title</th>
+                                <th>Last Update</th>
+                                <th>Channel Info</th>
+                                <th>User Name</th>
+                                <th>Key Words</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in video_detail %}
+                            <tr>
+                                <td>
+                                    <img class="profile_pic" src="{{ data.video_img.url }}" />
+                                </td>
+                                <td>
+                                    <a
+                                        class="channel_name_style"
+                                        href="{% url 'video_detail' pk=data.pk %}"
+                                        >{{ data.title }}
+                                    </a>
+                                </td>
+                                <td>{{ data.updated }}</td>
+                                <td>{{ data.channel_info }}</td>
+                                <td>{{ data.user_name }}</td>
+                                <td>{{ data.keyword }}</td>
+                                <td>
+                                    <a
+                                        type="button"
+                                        value="Edit"
+                                        class="btn btn-secondary"
+                                        href="{% url 'edit_video' pk=data.pk %}"
+                                        style="margin: auto"
+                                    >
+                                        Edit
+                                    </a>
+                                    <a
+                                        type="button"
+                                        value="Delete"
+                                        class="btn btn-danger"
+                                        href="{% url 'delete_video' pk=data.pk %}"
+                                        style="margin: auto"
+                                    >
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock content %}

@@ -6,7 +6,7 @@
     <title>
     {% block title %} 
     {% if user.is_authenticated %}
-    Todo List
+    Streamer
     {% else %}
     Login Page
     {% endif %}
@@ -217,27 +217,25 @@
             <button class="sidebar-btn">
               <a href="{% url 'home' %}"><i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;Home </a>
             </button>
-            <button class="sidebar-btn">
+            <!--button class="sidebar-btn">
               <a href="#services"><i class="fa fa-tint fa-lg" aria-hidden="true"></i>&nbsp;Trending</a>
-            </button>
+            </button-->
             <button class="sidebar-btn">
-              <a href="#clients"><i class="fa fa-youtube-play fa-lg" aria-hidden="true"></i>&nbsp;Subscriptions</a>
+              <a href="{% url 'subscription_view' %}"><i class="fa fa-youtube-play fa-lg" aria-hidden="true"></i>&nbsp;Subscriptions</a>
             </button>
-            <button class="sidebar-btn">
+            <!--button class="sidebar-btn">
               <a href="#contact"><i class="fa fa-history fa-lg" aria-hidden="true"></i>&nbsp;History </a>
-            </button>
+            </button-->
+            {% if user.is_authenticated %}
+              <div></div>
+            {% else %}
             <hr>
-            <h5 style="padding-left: 50px; color: #abb2b9; font-size: 18px; ">SUBSCRIPTIONS</h5>
-            <ul class="subscriptionsstyle">
-              {% if user.is_authenticated %}
-                {% for data in channel_name %}
-                    <li><a href="{% url 'channel_detail' pk=data.pk %}">{{ data.name }}</a></li>
-                {% endfor %}
-                {% else %}
-                <p style="color: #abb2b9; ">Sign in to like videos, comment, and subscribe.</p>
-                <a style="border:solid;" href="{% url 'login' %}"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;Login</a>
-              {% endif %}
-          </ul>
+              <h5 style="padding-left: 50px; color: #abb2b9; font-size: 18px; ">SUBSCRIPTIONS</h5>
+              <ul class="subscriptionsstyle">
+                  <p style="color: #abb2b9; ">Sign in to like videos, comment, and subscribe.</p>
+                  <a style="border:solid;" href="{% url 'login' %}"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;Login</a>
+              </ul>
+            {% endif %}
             <div style="margin-top: 450px; position: fixed; bottom: 0;">
               <div>
                 <!--a href="#"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;  New Group</a>
@@ -286,7 +284,7 @@
                   >Browse <span class="sr-only">(current)</span></a
                 >
               </li-->
-              <li class="nav-item dropdown">
+              <!--li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle"
                   href="#"
@@ -304,7 +302,7 @@
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Something else here</a>
                 </div>
-              </li>
+              </li-->
             </ul>
             <form
                 action="{% url 'search' %}" 
@@ -316,11 +314,11 @@
                 class="form-control mr-sm-2"
                 type="search"
                 name="q"
-                placeholder="Search"
+                placeholder="Search.."
                 aria-label="Search"
               />
               <button class="btn btn-success my-2 my-sm-0" type="submit">
-                Search
+                <i class="fa fa-search"></i>
               </button>
             </form>
           </div>

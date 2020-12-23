@@ -1,5 +1,5 @@
 {% extends 'dashboard_base.html' %}
-{% block title %} Add Movie Item page {% endblock title %} 
+{% block title %} Add Channel page {% endblock title %} 
 {% block content %}
 <style>
     .container{
@@ -20,7 +20,7 @@
           {% csrf_token %}
           <div class="card-header">
             <div class="card-title text-center">
-              <h1 class="text-light">Add Channel</h1>
+              <h1 class="text-light">Create Your Channel</h1>
             </div>
           </div>
           <div class="card-body" style="padding-bottom: 50px">
@@ -37,14 +37,7 @@
                 Submit
               </button>
 
-              <button
-                id="cancel"
-                type="reset"
-                class="btn btn-danger"
-                value="Cancel"
-              >
-                <a href="{% url 'dashboard' %}"></a>Cancel
-              </button>
+              <a class="btn btn-danger" href="{% url 'dashboard' %}">Cancel</a>
             </div>
           </div>
         </form>

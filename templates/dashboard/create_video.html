@@ -1,5 +1,5 @@
 {% extends 'dashboard_base.html' %}
-{% block title %} Add Movie Item page {% endblock title %} 
+{% block title %} Add Video Item page {% endblock title %} 
 {% block content %}
 <style>
     .container{
@@ -36,14 +36,7 @@
               >
                 Submit
               </button>
-
-              <button
-                id="cancel"
-                type="button"
-                class="btn btn-danger"
-              >
-                <a href="{% url 'dashboard' %}"></a>Cancel
-              </button>
+              <a class="btn btn-danger" href="{% url 'dashboard' %}">Cancel</a>
             </div>
           </div>
         </form>

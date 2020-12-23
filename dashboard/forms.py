@@ -46,7 +46,7 @@ class VideoInfoForm(forms.ModelForm):
     class Meta:
         model = VideoInfo
         fields = ('title', 'description', 'video_content',
-                  'video_img', 'channel_info', 'user_name')
+                  'video_img', 'channel_info', 'user_name', 'keyword')
         widgets = {
             'title': forms.TextInput(
                 attrs={
@@ -84,7 +84,14 @@ class VideoInfoForm(forms.ModelForm):
                     'class': 'form-control',
                     'style': 'padding-top: 1px;'
                 }
-            )
+            ),
+            'keyword': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': "Enter Some Keywords",
+
+                }
+            ),
         }
 
 

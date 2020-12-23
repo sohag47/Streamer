@@ -73,11 +73,12 @@ Dashboard | Channel Detail Page {% endblock title %} {% block content %}
           <h4><b>Username:</b>&nbsp; {{ user.get_username }}</h4>
           <h4><b>Email:</b>&nbsp;{{ user.email }}</h4>
           <div style="padding-left: 88%">
+            {% for data in user_extra %}
             <a
               type="button"
               value="Edit"
               class="btn btn-secondary"
-              href="#"
+              href="{% url 'edit_user_extra_info' pk=data.pk %}"
               style="margin: auto"
             >
               Edit
@@ -86,11 +87,12 @@ Dashboard | Channel Detail Page {% endblock title %} {% block content %}
               type="button"
               value="Delete"
               class="btn btn-danger"
-              href="#"
+              href="{% url 'delete_user_extra_info' pk=data.pk %}"
               style="margin: auto"
             >
               Delete
             </a>
+            {% endfor %}
           </div>
         </div>
       </div>
@@ -121,6 +123,7 @@ Dashboard | Channel Detail Page {% endblock title %} {% block content %}
               <tr>
                 <th>Image</th>
                 <th>Channel Name</th>
+                <th>Videos</th>
                 <th>Time</th>
                 <th>User Name</th>
                 <th>Action</th>
@@ -139,6 +142,7 @@ Dashboard | Channel Detail Page {% endblock title %} {% block content %}
                     >{{ data.name }}</a
                   >
                 </td>
+                <td><a href="{% url 'allvideos_list' %}">All Videos</a></td>
                 <td>{{ data.created_on|naturaltime }}</td>
                 <td>{{ data.user_name }}</td>
                 <td>

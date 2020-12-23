@@ -1,5 +1,10 @@
 {% extends 'base.html' %} 
 {% load humanize %}
+{% block title %} 
+{{ video_item_details.title }}
+{% endblock title %} 
+
+
 {% block content %}
 <style>
     .video-detail{
