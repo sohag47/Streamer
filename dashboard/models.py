@@ -16,6 +16,9 @@ class ChannelInfo(models.Model):
     def __str__(self):
         return self.name
 
+    def total_subscriber(self):
+        return self.subscribe.count()
+
 
 class VideoInfo(models.Model):
     title = models.CharField(max_length=250)

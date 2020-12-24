@@ -1,0 +1,80 @@
+{% extends 'dashboard_base.html' %} 
+{% block title %} Delete Comment Page{% endblock title %} 
+{% block content %}
+<style>
+  .container {
+    padding-left: 280px;
+    padding-top: 100px;
+  }
+  
+  thead {
+    background-color: #17202a;
+    color: #eaecee;
+
+  }
+  tbody {
+    background-color: #eaecee;
+    color: #17202a;
+
+  }
+  .table-hover {
+    background-color: #17202a;
+    color: #eaecee;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #17202a;
+  }
+  img.profile_pic{
+    width: 60px;
+    height: 60px;
+  }
+  a.channel_name_style{
+    color:  #17202a;
+  }
+</style>
+<!--Content Goes here-->
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col col-sm-10 col-md-8 col-xl-12">
+      <div class="card shadow-lg p-3 mb-5 rounded">
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="card-header bg-dark">
+            <div class="card-title text-center">
+              <h1 class="text-light">Delete Comment</h1>
+            </div>
+          </div>
+          <div class="card-body" style="padding-bottom: 50px">
+            <div style="padding-bottom: 20px">
+              <table class="table shadow table-hover table-bordered">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Confirm Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{ obj.name }}</td>    
+                    <td>{{ obj.body }}</td>    
+                    <td>Are you want to delete this item ?
+                      <input type="submit" value="YES" class="btn btn-danger" />
+                      <a href="{% url 'video_detail' obj.post.pk %}"class="btn btn-success">NO</a>
+                      
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+<!-- class="text-dark text" -->

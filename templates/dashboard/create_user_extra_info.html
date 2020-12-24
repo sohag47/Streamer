@@ -1,4 +1,5 @@
 {% extends 'dashboard_base.html' %}
+{% load crispy_forms_tags %}
 {% block title %} Add User Extra Info page {% endblock title %} 
 {% block content %}
 <style>
@@ -6,16 +7,20 @@
         padding-left: 280px;
         padding-top: 100px;
     }
+    .card{
+      border-radius: 20px;
+    }
     .card-header{
-      background-color: #2a3042;
+        background-color: #2a3042;
         color:  #f8f8fb;
+        border-radius: 20px;
     }
 </style>
 <!--Content Goes here-->
 <div class="container">
   <div class="row justify-content-center">
     <div class="col col-sm-10 col-md-8 col-xl-12">
-      <div class="card shadow-lg p-3 mb-5 rounded">
+      <div class="card shadow-lg p-3 mb-5">
         <form method="POST" enctype="multipart/form-data">
           {% csrf_token %}
           <div class="card-header">
@@ -25,9 +30,29 @@
           </div>
           <div class="card-body" style="padding-bottom: 50px">
             <div style="padding-bottom: 20px">
-              {{ form.as_p }}
+              <div class="row">
+                <div class="col-6">
+                  {{ form.user_info|as_crispy_field }}
+                </div>
+                <div class="col-6">
+                  {{ form.profile_img|as_crispy_field }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  {{ form.country|as_crispy_field }}
+                </div>
+                <div class="col-6">
+                  {{ form.language|as_crispy_field }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  {{ form.description|as_crispy_field }}
+                </div>
+              </div>
             </div>
-            <div style="margin-left: 400px">
+            <div style="margin-left: 300px">
               <button
                 id="submit"
                 type="submit"

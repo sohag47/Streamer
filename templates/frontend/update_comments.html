@@ -1,6 +1,5 @@
 {% extends 'dashboard_base.html' %}
-{% load crispy_forms_tags %}
-{% block title %} Edit Extra User Info page {% endblock title %} 
+{% block title %} Edit Comments page {% endblock title %} 
 {% block content %}
 <style>
     .container{
@@ -17,32 +16,12 @@
           {% csrf_token %}
           <div class="card-header bg-dark">
             <div class="card-title text-center">
-              <h1 class="text-light">Edit Extra User Info</h1>
+              <h1 class="text-light">Edit Your Comment Item</h1>
             </div>
           </div>
           <div class="card-body" style="padding-bottom: 50px">
             <div style="padding-bottom: 20px">
-             <div class="row">
-                <div class="col-6">
-                  {{ form.user_info|as_crispy_field }}
-                </div>
-                <div class="col-6">
-                  {{ form.profile_img|as_crispy_field }}
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-6">
-                  {{ form.country|as_crispy_field }}
-                </div>
-                <div class="col-6">
-                  {{ form.language|as_crispy_field }}
-                </div>
-              </div>
-              <div class="row">
-                <div class="col">
-                  {{ form.description|as_crispy_field }}
-                </div>
-              </div>
+              {{ form.as_p }}
             </div>
             <div style="margin-left: 400px">
               <button
@@ -53,7 +32,7 @@
               >
                 Submit
               </button>
-              <a class="btn btn-danger" href="{% url 'dashboard' %}">Cancel</a>
+              <a class="btn btn-danger" href="{% url 'video_detail' obj.post.pk %}">Cancel</a>
             </div>
           </div>
         </form>

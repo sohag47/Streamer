@@ -1,4 +1,5 @@
 {% extends 'dashboard_base.html' %}
+{% load crispy_forms_tags %}
 {% block title %} Edit Channel Item page {% endblock title %} 
 {% block content %}
 <style>
@@ -21,7 +22,27 @@
           </div>
           <div class="card-body" style="padding-bottom: 50px">
             <div style="padding-bottom: 20px">
-              {{ form.as_p }}
+             <div class="row">
+                <div class="col-6">
+                  {{ form.name|as_crispy_field }}
+                </div>
+                <div class="col-6">
+                  {{ form.user_name|as_crispy_field }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  {{ form.profile_img|as_crispy_field }}
+                </div>
+                <div class="col-6">
+                  {{ form.cover_img|as_crispy_field }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  {{ form.description|as_crispy_field }}
+                </div>
+              </div>
             </div>
             <div style="margin-left: 400px">
               <button

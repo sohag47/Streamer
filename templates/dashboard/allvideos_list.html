@@ -9,7 +9,7 @@ Subscribed Channel Page
 <style>
     div.main_content {
         padding-top: 90px;
-        padding-left: 280px;
+        padding-left: 250px;
         background-color: #d0d3d4;
         top: 0;
       }
@@ -74,10 +74,9 @@ Subscribed Channel Page
                             <tr>
                                 <th>Image</th>
                                 <th>Video Title</th>
-                                <th>Last Update</th>
-                                <th>Channel Info</th>
-                                <th>User Name</th>
                                 <th>Key Words</th>
+                                <th>User Name</th>
+                                <th>Last Update</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -94,10 +93,9 @@ Subscribed Channel Page
                                         >{{ data.title }}
                                     </a>
                                 </td>
-                                <td>{{ data.updated }}</td>
-                                <td>{{ data.channel_info }}</td>
-                                <td>{{ data.user_name }}</td>
                                 <td>{{ data.keyword }}</td>
+                                <td>{{ data.user_name }}</td>
+                                <td>{{ data.updated|naturaltime }}</td>
                                 <td>
                                     <a
                                         type="button"

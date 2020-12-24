@@ -1,8 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Permission, User
 # import models
-from dashboard.models import ChannelInfo, VideoInfo
+from dashboard.models import ChannelInfo, VideoInfo, Comments
 # import forms
 from dashboard.forms import CommentForm
 from django.http import HttpResponseRedirect
@@ -27,7 +27,7 @@ def search_result_view(request):
     context = {}
 
     query = request.GET.get('q')
-    #print(query)
+    # print(query)
     lookups = Q(keyword__icontains=query)
     video_item = VideoInfo.objects.filter(lookups).distinct()
 
@@ -103,19 +103,30 @@ def video_detail(request, pk):
     video_item_details = get_object_or_404(VideoInfo, pk=pk)
     channel_name = ChannelInfo.objects.filter(user_name=request.user)
     post = video_item_details
-    total_subscribe = channel_name.count()
+    staff2 = get_object_or_404(
+        ChannelInfo, pk=video_item_details.channel_info.pk)
+    total_subscribe = staff2.total_subscriber
     # view count
-    #staff2 = get_object_or_404(ChannelInfo, pk=pk)
+
     #subscribed = False
     # if staff2.subscribe.filter(pk=request.user.pk).exists():
     #subscribed = True
 
+    # view option:
     #sleeping_time = 3600
     # count seconds
     video_item_details.view = video_item_details.view + 1
     video_item_details.save()
     # if (time.sleep(sleeping_time)):
 
+    # like option:
+    staff = get_object_or_404(VideoInfo,  pk=pk)
+    total_likes = staff.total_likes()
+    liked = False
+    if staff.like.filter(pk=request.user.pk).exists():
+        liked = True
+
+    # comment form start:
     comments = post.comments.filter(active=True)
     new_comment = None
     if request.method == 'POST':
@@ -124,29 +135,61 @@ def video_detail(request, pk):
             new_comment = comment_form.save(commit=False)
             new_comment.post = post
             new_comment.save()
+            comment_form = CommentForm()
     else:
         comment_form = CommentForm()
-
-    staff = get_object_or_404(VideoInfo,  pk=pk)
-    total_likes = staff.total_likes()
-    liked = False
-    if staff.like.filter(pk=request.user.pk).exists():
-        liked = True
-
     context = {
-        # 'channel_detail_item': channel_detail_item,
-        'channel_name': channel_name,
-        'video_item_details': video_item_details,
-        'total_likes': total_likes,
-        'liked': liked,
-        'post': post,
-        # 'subscribed': subscribed,
-        'comments': comments,
-        'new_comment': new_comment,
-        'comment_form': comment_form,
-        'total_subscribe': total_subscribe
+                # 'channel_detail_item': channel_detail_item,
+                'channel_name': channel_name,
+                'video_item_details': video_item_details,
+                'total_likes': total_likes,
+                'liked': liked,
+                'post': post,
+                # 'subscribed': subscribed,
+                'comments': comments,
+                'new_comment': new_comment,
+                'comment_form': comment_form,
+                'total_subscribe': total_subscribe
     }
     return render(request, 'frontend/video_detail.html', context)
+    
+
+
+
+# Comment Operations:
+# Updatd Comments:
+
+
+def update_comments(request, pk):
+    context = {}
+    obj = get_object_or_404(Comments, pk=pk)
+    id = int(obj.post.pk)
+    form = CommentForm(request.POST or None, instance=obj)
+    if form.is_valid():
+        form.save()
+        #id = obj.post.pk
+        # return redirect('/video_detail/', id)
+        return HttpResponseRedirect('/video_detail/%d' % id)
+    context = {
+        'form': form,
+        'obj': obj
+    }
+    return render(request, 'frontend/update_comments.html', context)
+
+
+# Delete operation:
+def delete_comments(request, pk):
+    context = {}
+    obj = get_object_or_404(Comments, pk=pk)
+    id = int(obj.post.pk)
+
+    if request.method == "POST":
+        obj.delete()
+        return HttpResponseRedirect('/video_detail/%d' % id)
+    context = {
+        'obj': obj
+    }
+    return render(request, "frontend/delete_comments.html", context)
 
 
 @login_required

@@ -1,4 +1,5 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
+{% load crispy_forms_tags %} 
 {% load humanize %}
 {% block title %} 
 {{ video_item_details.title }}
@@ -39,6 +40,9 @@
         color: #2a3042;
         border-radius: 20px;
     }
+    a{
+        color: #2a3042;
+    }
 </style> 
 <div class="video-detail">
     <div class="row"> 
@@ -78,9 +82,11 @@
                             <b>&nbsp;{{  total_likes|intword }}Likes</b>
                         </form>
                     </div>
-                    <div class="col-xl-3">
+                    <!--div class="col-xl-3">
                         <form
-                            method="POST">
+                                action="{% url 'subscribe_view' video_item_details.channel_info.pk %}"
+                                method="POST"
+                            >
                         
                             {% csrf_token %} 
                             {% if subscribed %}
@@ -96,15 +102,15 @@
                             {% endif %}
                            
                         </form>
-                    </div>
+                    </div-->
                 </div>
             
 
             <div class="channel_nameimage">
                 <div>
                     <img class="img-circle profile_pic" src="{{ video_item_details.channel_info.profile_img.url }}" alt="Card image cap">
-                    {{ video_item_details.channel_info.name }}<br>
-                    <h4>&nbsp;{{ total_subscribe|intword }}Subscribers</h4>
+                    <a href="{% url 'channel_detail' video_item_details.channel_info.pk %}"><b>{{ video_item_details.channel_info.name }}</b><br></a>
+                    <h4><b>&nbsp;{{ total_subscribe|intword }}&nbsp; Subscribers</b></h4>
                 </div>
                 <!--like button-->
                 <br>
@@ -116,9 +122,9 @@
             <div>
                 <div >
                     <!-- comments -->
-                    <div class="card">
+                    <div class="card" style="padding-left: 30px;">
                         <div class="card-body">
-                            <h2>{{ comments.count|intword }} Comments</h2>
+                            <h2><b>{{ comments.count|intword }} Comments</b></h2>
                             {% for comment in comments %}
                                  <div class="comments" style="padding: 10px;">
                                     <p class="font-weight-bold">
@@ -129,11 +135,11 @@
                                     </p>
                                     {{ comment.body | linebreaks }}
                                     <a   class="btn btn-secondary"
-                                href="#"
+                                href="{% url 'update_comments' comment.id %}"
                             > Update 
                             </a>
                             <a    class="btn btn-danger ml-2"
-                                href="#"
+                                href="{% url 'delete_comments' comment.id %}"
                             > Delete 
                             </a> 
                                 </div>
@@ -144,11 +150,20 @@
                     <div class=" card mb-4  mt-3 ">
                         <div class="card-body">
 
-                                <h3>Leave a comment</h3>
+                                <h3 style="padding-left: 30px;"><b>Leave a comment</b></h3>
                                 <form method="post" style="margin-top: 1.3em;">
-                                    {{ comment_form }}
                                     {% csrf_token %}
-                                    <button type="submit" class="btn btn-success  btn-lg" style="margin-top: 10px;">Submit</button>
+                                    <div class="row">
+                                        <div class="col">
+                                          {{ comment_form.name|as_crispy_field }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            {{ comment_form.body|as_crispy_field }}
+                                          </div>
+                                    </div>
+                                    <button type="submit" style="margin-left: 30px;" class="btn btn-success  btn-lg" style="margin-top: 10px;">Submit</button>
                                 </form>
                             
                         </div>

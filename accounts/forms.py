@@ -19,7 +19,6 @@ class SignUpForm(UserCreationForm):
         widgets = {
             'first_name': forms.TextInput(
                 attrs={
-                    'class': 'form-control',
                     'placeholder': "Enter Your First Name",
                     'required': 'true'
 
@@ -27,7 +26,7 @@ class SignUpForm(UserCreationForm):
             ),
             'last_name': forms.TextInput(
                 attrs={
-                    'class': 'form-control',
+
                     'placeholder': "Enter Your Last Name",
                     'required': 'true'
 
@@ -35,7 +34,7 @@ class SignUpForm(UserCreationForm):
             ),
             'username': forms.TextInput(
                 attrs={
-                    'class': 'form-control',
+
                     'placeholder': "Enter User Name ",
                     'required': 'true'
 
@@ -43,7 +42,7 @@ class SignUpForm(UserCreationForm):
             ),
             'email': forms.EmailInput(
                 attrs={
-                    'class': 'form-control',
+
                     'placeholder': "Enter Your Email",
                     'required': 'true'
 
@@ -51,7 +50,7 @@ class SignUpForm(UserCreationForm):
             ),
             'password1': forms.PasswordInput(
                 attrs={
-                    'class': 'form-control',
+
                     'placeholder': "Enter First Password",
                     'required': 'true'
 
@@ -59,7 +58,6 @@ class SignUpForm(UserCreationForm):
             ),
             'password2': forms.PasswordInput(
                 attrs={
-                    'class': 'form-control',
                     'placeholder': "Enter Confirm Password",
                     'required': 'true'
 

@@ -10,17 +10,13 @@ class ChannelInfoForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(
                 attrs={
-                    'class': 'form-control',
                     'placeholder': "Enter Channel Name",
                     'required': 'true'
-
                 }
             ),
             'description': forms.Textarea(
                 attrs={
-                    'class': 'form-control',
                     'placeholder': "Enter Channel Description",
-
                 }
             ),
             'profile_img': forms.ClearableFileInput(
@@ -35,10 +31,11 @@ class ChannelInfoForm(forms.ModelForm):
             ),
             'user_name': forms.Select(
                 attrs={
-                    'class': 'form-control',
+
                     'style': 'padding-top: 1px;'
                 }
             )
+
         }
 
 

@@ -1,4 +1,5 @@
 {% extends 'dashboard_base.html' %}
+{% load crispy_forms_tags %}
 {% block title %} Edit Video Item page {% endblock title %} 
 {% block content %}
 <style>
@@ -21,7 +22,37 @@
           </div>
           <div class="card-body" style="padding-bottom: 50px">
             <div style="padding-bottom: 20px">
-              {{ form.as_p }}
+              <div class="row">
+                <div class="col">
+                  {{ form.title|as_crispy_field }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  {{ form.video_content|as_crispy_field }}
+                </div>
+                <div class="col-6">
+                  {{ form.video_img|as_crispy_field }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  {{ form.channel_info|as_crispy_field }}
+                </div>
+                <div class="col-6">
+                  {{ form.user_name|as_crispy_field }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  {{ form.description|as_crispy_field }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  {{ form.keyword|as_crispy_field }}
+                </div>
+              </div>
             </div>
             <div style="margin-left: 400px">
               <button
