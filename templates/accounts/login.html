@@ -1,11 +1,15 @@
-{% extends 'base_accounts.html' %} 
+{% extends 'base.html' %} 
 {% load static %} {% block stylesheet %}
 <link rel="stylesheet" href='{% static 'css/accounts.css' %}'> 
 {% endblock %} 
 
 
-{% block body %}
+{% block content %}
 <style>
+  .container{
+    padding-left: 0px;
+    padding-top: 0px;
+}
  .card-header{
   background-color: #2a3042;
   color:  #f8f8fb;
@@ -49,9 +53,9 @@
             New to Streamer? <a href="{% url 'signup'%}">Sign up</a>
           </div>
           <div class="text-center py-2">
-            <!--small>
-              <a href="#" class="text-muted"> Forgot your password? </a>
-            </small-->
+            <small>
+              <a href="{% url 'password_reset' %}" class="text-muted"> Forgot your password? </a>
+            </small>
           </div>
         </div>
       </div>

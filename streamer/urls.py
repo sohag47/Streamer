@@ -24,17 +24,53 @@ from accounts import views as accounts_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # Signup url
-    path('signup/', accounts_views.signup, name='signup'),
-    # Login url:
-    path('login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('', include("streameapp.urls")),
     path('dashboard/', include("dashboard.urls")),
+
+    # Signup url
+    path('signup/', accounts_views.signup, name='signup'),
+
+    # Login url:
+    path('login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name='login'),
+    # Logout url:
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+
+    # password reset:
+    path('password_reset/', auth_views.PasswordResetView.as_view(
+        template_name='accounts/password_reset.html'), name='password_reset'
+    ),
+    path('password_reset/done', auth_views.PasswordResetDoneView.as_view(
+        template_name='accounts/password_reset_done.html'), name='password_reset_done'
+    ),
+    path('password_reset_confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(
+        template_name='accounts/password_reset_confirm.html'), name='password_reset_confirm'
+    ),
+    path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(
+        template_name='accounts/password_reset_complete.html'), name='password_reset_complete'
+    ),
+    # password change:
+    path('password_change/', auth_views.PasswordChangeView.as_view(
+        template_name='accounts/password_change.html'), name='password_change'
+    ),
+    path('password_change_done/', auth_views.PasswordChangeDoneView.as_view(
+        template_name='accounts/password_change_done.html'), name='password_change_done'
+    ),
 ]
+
+handler404 = 'streameapp.views.error_404_not_found'
 
 # for django images
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
+
+'''
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+'''

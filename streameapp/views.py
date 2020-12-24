@@ -11,6 +11,11 @@ from django.urls import reverse
 import time
 from django.db.models import Q
 
+# 404 Not Found operation:
+# when type wrong url then server show 404 not found page without any error
+def error_404_not_found(request, exception):
+    return render(request, '404_Not_found.html', {})
+
 
 def home(request):
     channel_name = ChannelInfo.objects.all()
