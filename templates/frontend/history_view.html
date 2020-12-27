@@ -1,6 +1,6 @@
 {% extends 'base.html' %} 
 {% load humanize %}
-{% block title %}Streamer | Home Page {% endblock title %} 
+{% block title %}Streamer | History Page {% endblock title %} 
 
 
 {%block content %} 
@@ -40,27 +40,27 @@
     <div class="card-body shadow">
         <div class="row">
             <div class="col-12">
-                <h3>Latest Videos</h3>
+                <h3>Your History</h3>
             </div>
         </div>
         <div class="row">
-            {% for data in video_item %}
+            {% for data in history %}
                 <div class="col-xl-4">
-                    <a href="{% url 'video_detail' pk=data.pk %}">
-                    <video width='350' poster="{{ data.video_img.url }}" controls>
-                        <source src="{{ data.video_content.url }}" type='video/mp4'>
+                    <a href="{% url 'video_detail' pk=data.video_info.pk %}">
+                    <video width='350' poster="{{ data.video_info.video_img.url }}" controls>
+                        <source src="{{ data.video_info.video_content.url }}" type='video/mp4'>
                             Your browser does not support the video tag.
                     </video>
                     </a>
                     <div>
                         <div>
-                            <h4><b>{{ data.title }}</b></h4>
-                            <a class="channel_name" href="{% url 'channel_detail' pk=data.channel_info.pk %}"> 
-                                <p><b>{{ data.channel_info.name }}</b></p>
+                            <h4><b>{{ data.video_info.title }}</b></h4>
+                            <a class="channel_name" href="{% url 'channel_detail' pk=data.video_info.channel_info.pk %}"> 
+                                <p><b>{{ data.video_info.channel_info.name }}</b></p>
                             </a>
-                            <p><b>&nbsp;{{  data.view|intword }}&nbsp;Views&nbsp;{{ data.total_likes|intword }}&nbsp;Likes.</b> &nbsp;{{  data.created_on|naturaltime }}</p>
+                            <p><b>&nbsp;{{  data.video_info.view|intword }}&nbsp;Views&nbsp;{{ data.video_info.total_likes|intword }}&nbsp;Likes.</b> &nbsp;{{  data.video_info.created_on|naturaltime }}</p>
                         </div>
-                    </div>    
+                    </div>
                 </div>
             {% endfor %}
         </div>

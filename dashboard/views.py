@@ -121,7 +121,7 @@ def delete_video(request, pk):
     obj = get_object_or_404(VideoInfo, pk=pk)
     if request.method == "POST":
         obj.delete()
-        return redirect('/')
+        return redirect('allvideos_list')
     context = {
         'obj': obj
     }
@@ -136,7 +136,7 @@ def create_user_extra_info(request):
         form = ExtraUserInfoForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('dashboard')
     else:
         form = ExtraUserInfoForm()
     context = {
@@ -154,7 +154,7 @@ def edit_user_extra_info(request, pk):
             request.POST, request.FILES, instance=user_extra_info)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('dashboard')
     else:
         form = ExtraUserInfoForm(instance=user_extra_info)
     context = {

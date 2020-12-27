@@ -55,22 +55,6 @@ urlpatterns = [
     path('password_change_done/', auth_views.PasswordChangeDoneView.as_view(
         template_name='accounts/password_change_done.html'), name='password_change_done'
     ),
-]
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # for django images
 
 handler404 = 'streameapp.views.error_404_not_found'
-
-# for django images
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
-
-'''
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
-'''

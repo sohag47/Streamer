@@ -1,5 +1,12 @@
 from django import forms
-from dashboard.models import ChannelInfo, VideoInfo, Comments
+from django.db.models import fields
+from dashboard.models import ChannelInfo, VideoInfo, Comments, HistoryInfo
+
+
+class HistoryInfoForm(forms.ModelForm):
+    class Meta:
+        model = HistoryInfo
+        fields = ('video_info', 'user_name')
 
 
 class ChannelInfoForm(forms.ModelForm):

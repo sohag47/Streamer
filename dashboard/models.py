@@ -43,9 +43,14 @@ class VideoInfo(models.Model):
     def total_video(self):
         return self.video_content.count()
 
+
+# Video Hostory:
+class HistoryInfo(models.Model):
+    video_info = models.ForeignKey(VideoInfo, on_delete=models.CASCADE)
+    user_name = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
 # Comments:
-
-
 class Comments(models.Model):
     post = models.ForeignKey(
         VideoInfo, on_delete=models.CASCADE, related_name='comments')

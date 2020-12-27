@@ -2,10 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Permission, User
 # import models
-from dashboard.models import ChannelInfo, VideoInfo, Comments
+from dashboard.models import ChannelInfo, VideoInfo, Comments, HistoryInfo
 # import forms
-from dashboard.forms import CommentForm
-from django.http import HttpResponseRedirect
+from dashboard.forms import CommentForm, HistoryInfoForm
+from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.urls import reverse
 # Create your views here.
 import time
@@ -13,6 +13,8 @@ from django.db.models import Q
 
 # 404 Not Found operation:
 # when type wrong url then server show 404 not found page without any error
+
+
 def error_404_not_found(request, exception):
     return render(request, '404_Not_found.html', {})
 
@@ -111,12 +113,15 @@ def video_detail(request, pk):
     staff2 = get_object_or_404(
         ChannelInfo, pk=video_item_details.channel_info.pk)
     total_subscribe = staff2.total_subscriber
-    # view count
-
     #subscribed = False
     # if staff2.subscribe.filter(pk=request.user.pk).exists():
     #subscribed = True
+    #user = request.user
+    #instance = pk
 
+    #video = instance
+    #history = HistoryInfo(instance=pk, user_name=user)
+    # history.save()
     # view option:
     #sleeping_time = 3600
     # count seconds
@@ -130,8 +135,6 @@ def video_detail(request, pk):
     liked = False
     if staff.like.filter(pk=request.user.pk).exists():
         liked = True
-
-    # comment form start:
     comments = post.comments.filter(active=True)
     new_comment = None
     if request.method == 'POST':
@@ -144,25 +147,48 @@ def video_detail(request, pk):
     else:
         comment_form = CommentForm()
     context = {
-                # 'channel_detail_item': channel_detail_item,
-                'channel_name': channel_name,
-                'video_item_details': video_item_details,
-                'total_likes': total_likes,
-                'liked': liked,
-                'post': post,
-                # 'subscribed': subscribed,
-                'comments': comments,
-                'new_comment': new_comment,
-                'comment_form': comment_form,
-                'total_subscribe': total_subscribe
+        # 'channel_detail_item': channel_detail_item,
+        'channel_name': channel_name,
+        'video_item_details': video_item_details,
+        'total_likes': total_likes,
+        'liked': liked,
+        'post': post,
+        # 'subscribed': subscribed,
+        'comments': comments,
+        'new_comment': new_comment,
+        'comment_form': comment_form,
+        'total_subscribe': total_subscribe
     }
     return render(request, 'frontend/video_detail.html', context)
-    
-
 
 
 # Comment Operations:
-# Updatd Comments:
+'''
+# create comment:
+def create_comment(request):
+    # comment form start:
+    #new_comment = None
+    if request.method == 'POST':
+        video_infos = get_object_or_404(VideoInfo, video_id)
+        name = request.POST['name']
+        comment = request.POST['comment']
+        video_id = request.POST['video_id']
+        new_comment = Comments(post=video_id, name=name, body=comment)
+        new_comment.save()
+        print(name)
+        print(comment)
+        print(video_id)
+        return HttpResponseRedirect('/')
+        #id = int(14)
+        # return HttpResponseRedirect('/channel_detail/%d' % id)
+    # else:
+        # pass
+        #id = int(post.pk)
+        # return HttpResponseRedirect('/channel_detail/%d' % id)
+        #comment_form = CommentForm()
+
+        # Updatd Comments:
+'''
 
 
 def update_comments(request, pk):
@@ -219,3 +245,24 @@ def subscription_view(request):
         'channel_detail': channel_detail
     }
     return render(request, 'frontend/subscription_view.html', context)
+
+
+@login_required
+def history_view(request):
+    '''
+    if request.method == "POST":
+        user = request.user
+        video = request.POST['history']
+        history = HistoryInfo(video_info=video, user_name=user)
+        history.save()
+        return redirect(f'/video_detail/{video}')
+    '''
+    #channel_name = ChannelInfo.objects.all()
+    #video_item = VideoInfo.objects.all()
+    history = HistoryInfo.objects.filter(user_name=request.user)
+    context = {
+        # 'channel_name': channel_name,
+        # 'video_item': video_item,
+        'history': history
+    }
+    return render(request, 'frontend/history_view.html', context)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from dashboard.models import ChannelInfo, VideoInfo, Comments
+from dashboard.models import ChannelInfo, VideoInfo, Comments, HistoryInfo
 # Register your models here.
 
 # Register your models here.
@@ -33,3 +33,4 @@ class VideoInfoAdmin(admin.ModelAdmin):
 admin.site.register(VideoInfo, VideoInfoAdmin)
 
 admin.site.register(Comments)
+admin.site.register(HistoryInfo)

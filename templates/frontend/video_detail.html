@@ -47,7 +47,7 @@
 <div class="video-detail">
     <div class="row"> 
         <div class="col-xl">
-            <video poster="{{ video_item_details.video_img.url }}" controls>
+            <video poster="{{ video_item_details.video_img.url }}" controls autoplay>
                     <source src="{{ video_item_details.video_content.url }}" type='video/mp4'>
                         Your browser does not support the video tag.
             </video>
@@ -69,7 +69,8 @@
                                     type="submit" 
                                     name="post_id"
                                     class="btn btn-warning text-dark"
-                                ><i class="fa fa-thumbs-o-down fa-lg" aria-hidden="true"></i>&nbsp;<b>Unlike</b> 
+                                >
+                                <i class="fa fa-thumbs-o-down fa-lg" aria-hidden="true"></i>&nbsp;<b>Unlike</b> 
                                 </button>
                             {% else %}
                                 <button 
@@ -118,7 +119,6 @@
                     <p>{{ video_item_details.description }}</p> 
                 </div>
             </div>
-
             <div>
                 <div >
                     <!-- comments -->
@@ -149,9 +149,8 @@
     
                     <div class=" card mb-4  mt-3 ">
                         <div class="card-body">
-
-                                <h3 style="padding-left: 30px;"><b>Leave a comment</b></h3>
-                                <form method="post" style="margin-top: 1.3em;">
+                            <h3 style="padding-left: 30px;"><b>Leave a comment</b></h3>
+                            <form method="post" style="margin-top: 1.3em;">
                                     {% csrf_token %}
                                     <div class="row">
                                         <div class="col">
@@ -163,9 +162,14 @@
                                             {{ comment_form.body|as_crispy_field }}
                                           </div>
                                     </div>
-                                    <button type="submit" style="margin-left: 30px;" class="btn btn-success  btn-lg" style="margin-top: 10px;">Submit</button>
-                                </form>
-                            
+                                    <button type="submit"  
+                                        style="margin-left: 30px;" 
+                                        class="btn btn-success  btn-lg" 
+                                        style="margin-top: 10px;"
+                                    >
+                                        Submit
+                                    </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -174,7 +178,6 @@
         </div>
     </div>
 </div>
-
 
 
 {% endblock content %}
